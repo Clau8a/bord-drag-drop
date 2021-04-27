@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from './draggableTask';
 
-
-// region C A R D   C O N T A I N E R   d r a g g a b l e
-
-const DraggableCardContainer = (props) => {
-  const {
-    title, counter, color, view, dropDrag, id, draggable,
-    cards, component,
-    setDraggable, statusLabel, idKey, isRestricted, hide,
-  } = props;
+const ColumnDrag = ({
+  title,
+  color,
+  view,
+  dropDrag,
+  id,
+  draggable,
+  tasks,
+  taskComponent,
+  setDraggable,
+  taskIdLabel,
+  isRestricted,
+}) => {
   const [isOpenCollapse, setIsOpenCollapse] = React.useState(true);
   const [over, setOver] = React.useState('');
   React.useEffect(() => {
@@ -19,8 +23,8 @@ const DraggableCardContainer = (props) => {
     }
   }, [view]);
 
-  function formatCounter(newCounter) {
-    return newCounter > 9 ? '+9' : (`0${newCounter}`);
+  function formatCounter(counter) {
+    return counter > 9 ? '+9' : (`0${counter}`);
   }
 
   function drop(e, iDropedElement) {
@@ -43,24 +47,23 @@ const DraggableCardContainer = (props) => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    if (isRestricted && draggable.is_supervisor === 0) {
+    if (isRestricted) {
       setOver('over block');
     } else {
       setOver('over');
     }
   };
 
-  console.log('color', color);
   return (
-    <div className={`cards-container ${hide}`}>
+    <div className="column-task-container">
 
-      <div className="container-header" onClick={setCollapse}>
-        <label className="counter" style={{ backgroundColor: `#${color}` }}>{formatCounter(counter)} {color}</label>
+      <div className="column-header" onClick={setCollapse}>
+        <label className="counter" style={{ backgroundColor: `${color}` }}>{formatCounter(tasks.length)}</label>
         <label className="title">{title}</label>
       </div>
 
       <div
-        className={`cardD-container ${over}`}
+        className={`column-body ${over}`}
         onDrop={(e) => drop(e, id)}
         onDragOver={handleDragOver}
         onDragLeave={(e) => { e.preventDefault(); setOver(''); }}
@@ -69,19 +72,16 @@ const DraggableCardContainer = (props) => {
         {/* <MDBCollapse isOpen={isOpenCollapse}> */}
         <div>
           {
-            cards.map(card => (
+            tasks.map(task => (
               <Task
-                key={card[idKey]}
-                card={card}
-                clickOnCard={card.clickOnCard ? card.clickOnCard : props.clickOnCard}
+                key={task[taskIdLabel]}
+                task={task}
                 view={view}
                 color={color}
                 draggable={draggable}
-                setDraggable={setCardTarget}
-                statusLabel={statusLabel}
-                idKey={idKey}
-                component={component}
-              // clickOnCard={() => Details(history, `/cotizaciones/${elm.id}`)}
+                setDraggable={!isRestricted ? setCardTarget : f => f}
+                idKey={taskIdLabel}
+                component={taskComponent}
               />
             ))
           }
@@ -92,36 +92,28 @@ const DraggableCardContainer = (props) => {
   );
 };
 
-DraggableCardContainer.propTypes = {
+ColumnDrag.propTypes = {
   title: PropTypes.string,
-  counter: PropTypes.number,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   view: PropTypes.string,
-  clickOnCard: PropTypes.func,
-  cards: PropTypes.array,
-  idKey: PropTypes.string,
-  statusLabel: PropTypes.string,
-  component: PropTypes.func,
+  tasks: PropTypes.array,
+  taskIdLabel: PropTypes.string,
+  taskComponent: PropTypes.func,
   isRestricted: PropTypes.bool,
-  hide: PropTypes.string,
   dropDrag: PropTypes.func,
   setDraggable: PropTypes.func,
 };
 
-DraggableCardContainer.defaultProps = {
-  title: 'Card Title',
-  counter: 0,
+ColumnDrag.defaultProps = {
+  title: 'Column Title',
   view: 'kanban',
-  clickOnCard: f => f,
-  cards: [],
-  idKey: 'idKey',
-  statusLabel: 'statusLabel',
-  component: null,
+  color: '000',
+  tasks: [],
+  taskIdLabel: 'id',
+  taskComponent: null,
   isRestricted: false,
-  hide: '',
   dropDrag: f => f,
   setDraggable: f => f,
 };
-// endregion
 
-export default DraggableCardContainer;
+export default ColumnDrag;

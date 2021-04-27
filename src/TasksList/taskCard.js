@@ -4,10 +4,11 @@ const TaskCard = (card) => {
 
 
   return (
-    <div className="card custom-card">
-      <div className="card-header">
+    <div className="task">
+      <div className="task-header">
         <label>{card.title}</label>
       </div>
+      <div></div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ function App() {
       <header className="app-header">
         <h1>Task Board Example</h1>
       </header>
-      <div>
+      <div className="task-list">
         <TasksList />
 
       </div>
