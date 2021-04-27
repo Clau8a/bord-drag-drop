@@ -1,0 +1,39 @@
+.custom-card{
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  .card-header{
+    color:#4F4F4F !important;
+    background-color: #fff;
+    border: none;
+    padding: .7em;
+    cursor: pointer;
+    label{
+      cursor: pointer;
+      margin:0 !important;
+      font-weight: 600;
+      font-size: 18px;
+      white-space: pre-wrap;
+    }
+  }
+  .card-body{
+    padding:0 .7em .7em .7em;
+    .title-card{
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin:0;
+    }
+    .data-card{
+      // display: block;
+      font-size: 16px;
+      font-weight: 500;
+      margin:0;
+      i{
+        margin-right: .7em;
+      }
+    }
+    .progress{
+      border-radius: 8px;
+      background-color: #E0E0E0;
+    }
+  }
+}
