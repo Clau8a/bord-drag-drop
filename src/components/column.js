@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Task from './draggableTask';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import Task from './draggableTask'
 
 const ColumnDrag = ({
   title,
@@ -15,82 +15,84 @@ const ColumnDrag = ({
   taskIdLabel,
   isRestricted,
 }) => {
-  const [isOpenCollapse, setIsOpenCollapse] = React.useState(true);
-  const [over, setOver] = React.useState('');
-  React.useEffect(() => {
+  const [isOpenCollapse, setIsOpenCollapse] = useState(true)
+  const [over, setOver] = useState('')
+  useEffect(() => {
     if (view === 'kanban') {
-      setIsOpenCollapse(true);
+      setIsOpenCollapse(true)
     }
-  }, [view]);
+  }, [view])
 
   function formatCounter(counter) {
-    return counter > 9 ? '+9' : (`0${counter}`);
+    return counter > 9 ? '+9' : `0${counter}`
   }
 
   function drop(e, iDropedElement) {
     // sending to pa
-    dropDrag(draggable, iDropedElement);
+    dropDrag(draggable, iDropedElement)
     // clean target card
-    setDraggable(null);
-    setOver('');
+    setDraggable(null)
+    setOver('')
   }
 
   function setCardTarget(card) {
-    setDraggable(card);
+    setDraggable(card)
   }
 
   function setCollapse() {
     if (view === 'list') {
-      setIsOpenCollapse(!isOpenCollapse);
+      setIsOpenCollapse(!isOpenCollapse)
     }
   }
 
   const handleDragOver = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (isRestricted) {
-      setOver('over block');
+      setOver('over block')
     } else {
-      setOver('over');
+      setOver('over')
     }
-  };
+  }
 
   return (
-    <div className="column-task-container">
-
-      <div className="column-header" onClick={setCollapse}>
-        <label className="counter" style={{ backgroundColor: `${color}` }}>{formatCounter(tasks.length)}</label>
-        <label className="title">{title}</label>
+    <div className='column-task-container'>
+      <div className='column-header' onClick={setCollapse}>
+        <label className='counter' style={{ backgroundColor: `${color}` }}>
+          {formatCounter(tasks.length)}
+        </label>
+        <label className='title'>{title}</label>
       </div>
 
       <div
         className={`column-body ${over}`}
         onDrop={(e) => drop(e, id)}
         onDragOver={handleDragOver}
-        onDragLeave={(e) => { e.preventDefault(); setOver(''); }}
+        onDragLeave={(e) => {
+          e.preventDefault()
+          setOver('')
+        }}
         style={{ cursor: `${isRestricted ? 'no-drop' : 'auto'}` }}
       >
         {/* <MDBCollapse isOpen={isOpenCollapse}> */}
         <div>
-          {
-            tasks.map(task => (
-              <Task
-                key={task[taskIdLabel]}
-                task={task}
-                view={view}
-                color={color}
-                draggable={draggable}
-                setDraggable={!isRestricted ? setCardTarget : f => f}
-                idKey={taskIdLabel}
-                component={taskComponent}
-              />
-            ))
-          }
+          {tasks.map((task) => (
+            <Task
+              key={task[taskIdLabel]}
+              task={task}
+              view={view}
+              color={color}
+              draggable={draggable}
+              setDraggable={!isRestricted ? setCardTarget : (f) => f}
+              idKey={taskIdLabel}
+              component={taskComponent}
+            />
+          ))}
         </div>
         {/* </MDBCollapse> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
 ColumnDrag.propTypes = {
   title: PropTypes.string,
@@ -102,7 +104,9 @@ ColumnDrag.propTypes = {
   isRestricted: PropTypes.bool,
   dropDrag: PropTypes.func,
   setDraggable: PropTypes.func,
-};
+  id: PropTypes.string,
+  draggable: PropTypes.bool,
+}
 
 ColumnDrag.defaultProps = {
   title: 'Column Title',
@@ -112,8 +116,8 @@ ColumnDrag.defaultProps = {
   taskIdLabel: 'id',
   taskComponent: null,
   isRestricted: false,
-  dropDrag: f => f,
-  setDraggable: f => f,
-};
+  dropDrag: (f) => f,
+  setDraggable: (f) => f,
+}
 
-export default ColumnDrag;
+export default ColumnDrag
