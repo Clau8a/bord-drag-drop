@@ -13,3 +13,11 @@ export const dummyData = [
   { id_task: 12, title: 'Task 12', statusId: 'pending' },
   { id_task: 13, title: 'Task 13', statusId: 'pending' },
 ]
+
+export const columnsArray = [
+  { id: '1', title: 'column 1', color: '#222' },
+  { id: '2', title: 'column 2', color: 'blue' },
+  { id: 'pending', title: 'pending', color: '#f3f' },
+  { id: 'done', title: 'Done', color: '#8c00ff' },
+  { id: 'cancel', title: 'cancel', color: '#ff8300' },
+]

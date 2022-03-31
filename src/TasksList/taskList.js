@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ColumnsContainer from '../components/ColumnsContainer'
 import ColumnDrag from '../components/column'
 import TaskCard from './taskCard'
-import { dummyData } from '../utils/constants'
+import { dummyData, columnsArray } from '../utils/constants'
 
 function TasksList({ view }) {
   const [tasks, setTask] = useState(dummyData)
@@ -18,41 +18,16 @@ function TasksList({ view }) {
 
   return (
     <ColumnsContainer view={view} dropDrag={ChangeTaskStatus} taskIdLabel='id_task'>
-      <ColumnDrag
-        id='1'
-        title='column 1'
-        color='#222'
-        tasks={tasks.filter((task) => task.statusId === '1')}
-        taskComponent={TaskCard}
-      />
-      <ColumnDrag
-        id='2'
-        title='column 2'
-        color='blue'
-        tasks={tasks.filter((task) => task.statusId === '2')}
-        taskComponent={TaskCard}
-      />
-      <ColumnDrag
-        id='pending'
-        title='pending'
-        color='#f3f'
-        tasks={tasks.filter((task) => task.statusId === 'pending')}
-        taskComponent={TaskCard}
-      />
-      <ColumnDrag
-        id='done'
-        title='Done'
-        color='#8c00ff'
-        tasks={tasks.filter((task) => task.statusId === 'done')}
-        taskComponent={TaskCard}
-      />
-      <ColumnDrag
-        id='cancel'
-        title='Cancel'
-        color='#ff8300'
-        tasks={tasks.filter((task) => task.statusId === 'cancel')}
-        taskComponent={TaskCard}
-      />
+      {columnsArray.map((column) => (
+        <ColumnDrag
+          key={column.id}
+          id={column.id}
+          title={column.title.toLocaleLowerCase()}
+          color={column.color}
+          tasks={tasks.filter((task) => task.statusId === column.id)}
+          taskComponent={TaskCard}
+        />
+      ))}
     </ColumnsContainer>
   )
 }
