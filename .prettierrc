@@ -1,0 +1,20 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "spaceBeforeFunctionParent": false,
+  "jsxMaxPropsPerLine": 1,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["src/test/*.test.js"],
+      "options": {
+        "prettier.printWidth": 200
+      }
+    }
+  ]
+}
