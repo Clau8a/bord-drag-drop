@@ -1,0 +1,15 @@
+export const dummyData = [
+  { id_task: 1, title: 'Task 1', statusId: '1' },
+  { id_task: 2, title: 'Task 2', statusId: 'pending' },
+  { id_task: 3, title: 'Task three with a very very long title', statusId: '2' },
+  { id_task: 4, title: 'Task 4', statusId: 'pending' },
+  { id_task: 5, title: 'Task 5', statusId: 'pending' },
+  { id_task: 6, title: 'Task 6', statusId: 'pending' },
+  { id_task: 7, title: 'Task 7', statusId: 'pending' },
+  { id_task: 8, title: 'Task 8', statusId: 'pending' },
+  { id_task: 9, title: 'Task 9', statusId: 'pending' },
+  { id_task: 10, title: 'Task 10', statusId: 'pending' },
+  { id_task: 11, title: 'Task 11', statusId: 'pending' },
+  { id_task: 12, title: 'Task 12', statusId: 'pending' },
+  { id_task: 13, title: 'Task 13', statusId: 'pending' },
+]

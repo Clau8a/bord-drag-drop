@@ -78,10 +78,18 @@
 .list {
   .column-task-container {
     width: 100%;
-    display: block;
+    display: inline-block;
+    box-sizing: border-box;
 
     .column-body {
-      height: 10vh;
+      &.collapse {
+        height: 0;
+        overflow-y: hidden;
+        transition: all ease-in 0.5s;
+      }
+      height: 20vh;
+      overflow-y: auto;
+      transition: all ease-in 0.5s;
     }
   }
 }
