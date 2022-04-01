@@ -17,6 +17,7 @@ const ColumnDrag = ({
 }) => {
   const [isOpenCollapse, setIsOpenCollapse] = useState(true)
   const [over, setOver] = useState('')
+
   useEffect(() => {
     if (view === 'kanban') {
       setIsOpenCollapse(true)
@@ -40,6 +41,7 @@ const ColumnDrag = ({
   }
 
   function setCollapse() {
+    console.log('setcollapse')
     if (view === 'list') {
       setIsOpenCollapse(!isOpenCollapse)
     }
@@ -64,7 +66,7 @@ const ColumnDrag = ({
       </div>
 
       <div
-        className={`column-body ${over}`}
+        className={`column-body ${over} ${isOpenCollapse ? 'open' : 'collapse'}`}
         onDrop={(e) => drop(e, id)}
         onDragOver={handleDragOver}
         onDragLeave={(e) => {
