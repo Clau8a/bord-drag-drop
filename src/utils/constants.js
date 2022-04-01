@@ -1,5 +1,11 @@
 export const dummyData = [
-  { id_task: 1, title: 'Task 1', statusId: '1' },
+  {
+    id_task: 1,
+    title: 'Task 1',
+    statusId: '1',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  },
   { id_task: 2, title: 'Task 2', statusId: 'pending' },
   { id_task: 3, title: 'Task three with a very very long title', statusId: '2' },
   { id_task: 4, title: 'Task 4', statusId: 'pending' },

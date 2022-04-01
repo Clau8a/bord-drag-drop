@@ -57,7 +57,7 @@ const ColumnDrag = ({
   }
 
   return (
-    <div className='column-task-container'>
+    <div className='column-task-container' data-testid='column'>
       <div className='column-header' onClick={setCollapse}>
         <label
           title={`${tasks.length} tasks`}
@@ -78,9 +78,9 @@ const ColumnDrag = ({
           setOver('')
         }}
         style={{ cursor: `${isRestricted ? 'no-drop' : 'auto'}` }}
+        data-testid={`${title}-drag`}
       >
-        {/* <MDBCollapse isOpen={isOpenCollapse}> */}
-        <div>
+        <div data-testid={title}>
           {tasks.map((task) => (
             <Task
               key={task[taskIdLabel]}
@@ -94,7 +94,6 @@ const ColumnDrag = ({
             />
           ))}
         </div>
-        {/* </MDBCollapse> */}
       </div>
     </div>
   )

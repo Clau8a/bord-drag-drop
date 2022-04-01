@@ -1,0 +1,27 @@
+.task {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 0.5em;
+  padding: 0.7em;
+  background-color: #fff;
+
+  .task-header {
+    color: #4f4f4f !important;
+    border: none;
+
+    cursor: pointer;
+    font-weight: 500;
+    label {
+      cursor: pointer;
+      margin: 0 !important;
+      font-weight: 600;
+      font-size: 18px;
+      white-space: pre-wrap;
+    }
+  }
+
+  .description {
+    margin-top: 1em;
+    font-size: 16px;
+    white-space: pre-wrap;
+  }
+}

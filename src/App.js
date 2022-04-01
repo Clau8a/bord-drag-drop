@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TasksList from './TasksList/taskList'
+import { dummyData, columnsArray } from './utils/constants'
 import './App.css'
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         </button>
       </div>
       <div className='task-list'>
-        <TasksList view={view} />
+        <TasksList view={view} data={dummyData} columns={columnsArray} />
       </div>
     </div>
   )

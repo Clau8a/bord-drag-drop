@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import ColumnsContainer from '../components/ColumnsContainer'
 import ColumnDrag from '../components/column'
-import TaskCard from './taskCard'
-import { dummyData, columnsArray } from '../utils/constants'
+import TaskCard from '../components/taskCard/taskCard'
 
-function TasksList({ view }) {
-  const [tasks, setTask] = useState(dummyData)
+function TasksList({ view, data, columns }) {
+  const [tasks, setTask] = useState(data)
 
   const ChangeTaskStatus = (taskChanged, newStatus) => {
     setTask(
@@ -18,7 +17,7 @@ function TasksList({ view }) {
 
   return (
     <ColumnsContainer view={view} dropDrag={ChangeTaskStatus} taskIdLabel='id_task'>
-      {columnsArray.map((column) => (
+      {columns.map((column) => (
         <ColumnDrag
           key={column.id}
           id={column.id}
@@ -34,10 +33,14 @@ function TasksList({ view }) {
 
 TasksList.propTypes = {
   view: PropTypes.string,
+  data: PropTypes.array,
+  columns: PropTypes.array,
 }
 
 TasksList.defaultProps = {
   view: 'kanban',
+  data: [],
+  columns: [],
 }
 
 export default TasksList
