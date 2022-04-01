@@ -59,7 +59,11 @@ const ColumnDrag = ({
   return (
     <div className='column-task-container'>
       <div className='column-header' onClick={setCollapse}>
-        <label className='counter' style={{ backgroundColor: `${color}` }}>
+        <label
+          title={`${tasks.length} tasks`}
+          className='counter'
+          style={{ backgroundColor: `${color}` }}
+        >
           {formatCounter(tasks.length)}
         </label>
         <label className='title'>{title}</label>
