@@ -1,0 +1,46 @@
+.app {
+  padding: 1rem;
+}
+
+.task-list {
+  background-color: #eaeaea;
+}
+
+.custom-task-list {
+  border: 1px solid #eaeaea;
+
+  .custom-column-header {
+    box-sizing: border-box;
+    padding: 0.7em;
+    box-shadow: none !important;
+    border: 1px solid #eaeaea;
+
+    .title {
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }
+
+  .custom-task {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 0.7em;
+
+    .task-header {
+      label {
+        cursor: pointer;
+        margin: 0 !important;
+        font-size: 16px;
+        white-space: pre-wrap;
+      }
+    }
+
+    .description {
+      margin-top: 1em;
+      font-size: 12px;
+      font-weight: 100;
+      white-space: pre-wrap;
+    }
+  }
+}

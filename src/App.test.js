@@ -3,8 +3,8 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
 
-test('renders learn react link', () => {
+test('renders Task Board Example title', () => {
   render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
+  const linkElement = screen.getByText(/Task Board Example/i)
   expect(linkElement).toBeInTheDocument()
 })

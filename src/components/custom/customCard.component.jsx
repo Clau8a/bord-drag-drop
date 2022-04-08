@@ -1,12 +1,12 @@
 import React from 'react'
-import './task.scss'
+
 const TaskCard = (card) => {
   return (
-    <div className='task'>
+    <div className='custom-task' data-testid='task' style={{ border: `1px solid ${card.color}` }}>
       <div className='task-header'>
         <label>{card.title}</label>
       </div>
-      <div></div>
+      {card.description && <div className='description'>{card.description}</div>}
     </div>
   )
 }
