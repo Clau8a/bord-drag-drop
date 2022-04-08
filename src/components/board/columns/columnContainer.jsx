@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './draggable.scss'
 
 // region contenedor de las columnas o listas de tarjetas
 const ColumnsContainer = ({ view, statusLabel, dropDrag, taskIdLabel, children }) => {

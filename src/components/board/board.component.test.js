@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
-import TasksList from './taskList'
+import Board from './board.component'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { columnsArray, dummyData } from '../utils/constants'
+import { columnsArray, dummyData } from '../../utils/constants'
 
 test('render 5 columns', () => {
-  render(<TasksList columns={columnsArray} data={dummyData} />)
+  render(<Board columns={columnsArray} data={dummyData} />)
   const columns = screen.getAllByTestId('column')
   expect(columns.length).toBe(5)
 })
@@ -15,7 +15,7 @@ test('drag one task from pending column to done column', () => {
     { id: 'pending', title: 'pending', color: '#f3f' },
     { id: 'done', title: 'done', color: '#8c00ff' },
   ]
-  render(<TasksList view='kanban' columns={columns} data={data} />)
+  render(<Board view='kanban' columns={columns} data={data} />)
   const pendingColumn = screen.getAllByTestId('pending')
   const doneColumnDrag = screen.getByTestId('done-drag')
   const doneTasks = screen.getAllByTestId('done')

@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const DraggableCard = ({ task, idkey, draggable, setDraggable, component }) => {
-  // function fires when drag, it puts a new
-  // task as the target with de propfunct setDraggable
+const DraggableCard = ({ task, idkey, draggable, setDraggable, component, color }) => {
+  // this function sets a new task as the target with de propfunct setDraggable
   function drag() {
     if (typeof draggable === 'undefined' || draggable === null) {
       setDraggable(task)
@@ -15,7 +14,7 @@ const DraggableCard = ({ task, idkey, draggable, setDraggable, component }) => {
   return (
     <div onDrag={drag} draggable id={task[idkey]}>
       {component ? (
-        component(task)
+        component({ ...task, color })
       ) : (
         <div className='card'>
           <div className='Card-body'>
@@ -33,6 +32,7 @@ DraggableCard.propTypes = {
   draggable: PropTypes.object,
   setDraggable: PropTypes.func,
   component: PropTypes.func,
+  color: PropTypes.string,
 }
 
 DraggableCard.defaultProps = {
@@ -40,6 +40,7 @@ DraggableCard.defaultProps = {
   component: null,
   idkey: 'id',
   setDraggable: (f) => f,
+  color: '#eaeaea',
 }
 
 export default DraggableCard

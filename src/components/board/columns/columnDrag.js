@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Task from './draggableTask'
+import DraggableTask from '../draggableTask/draggableTask.component'
 
 const ColumnDrag = ({
-  title,
-  color,
   view,
-  dropDrag,
   id,
-  draggable,
+  title,
   tasks,
+  color,
+  dropDrag,
+  draggable,
   taskComponent,
   setDraggable,
   taskIdLabel,
   isRestricted,
+  columnHeaderComponent,
 }) => {
   const [isOpenCollapse, setIsOpenCollapse] = useState(true)
   const [over, setOver] = useState('')
@@ -23,10 +24,6 @@ const ColumnDrag = ({
       setIsOpenCollapse(true)
     }
   }, [view])
-
-  function formatCounter(counter) {
-    return counter > 9 ? '+9' : `0${counter}`
-  }
 
   function drop(e, iDropedElement) {
     // sending to pa
@@ -58,17 +55,8 @@ const ColumnDrag = ({
 
   return (
     <div className='column-task-container' data-testid='column'>
-      <div className='column-header' onClick={setCollapse}>
-        <label
-          title={`${tasks.length} tasks`}
-          className='counter'
-          style={{ backgroundColor: `${color}` }}
-        >
-          {formatCounter(tasks.length)}
-        </label>
-        <label className='title'>{title}</label>
-      </div>
-
+      <div onClick={setCollapse}></div>
+      {columnHeaderComponent(title, tasks.length, color)}
       <div
         className={`column-body ${over} ${isOpenCollapse ? 'open' : 'collapse'}`}
         onDrop={(e) => drop(e, id)}
@@ -82,7 +70,7 @@ const ColumnDrag = ({
       >
         <div data-testid={title}>
           {tasks.map((task) => (
-            <Task
+            <DraggableTask
               key={task[taskIdLabel]}
               task={task}
               view={view}
@@ -105,12 +93,13 @@ ColumnDrag.propTypes = {
   view: PropTypes.string,
   tasks: PropTypes.array,
   taskIdLabel: PropTypes.string,
-  taskComponent: PropTypes.func,
   isRestricted: PropTypes.bool,
   dropDrag: PropTypes.func,
   setDraggable: PropTypes.func,
   id: PropTypes.string,
   draggable: PropTypes.bool,
+  taskComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  columnHeaderComponent: PropTypes.func,
 }
 
 ColumnDrag.defaultProps = {
@@ -123,6 +112,7 @@ ColumnDrag.defaultProps = {
   isRestricted: false,
   dropDrag: (f) => f,
   setDraggable: (f) => f,
+  columnHeaderComponent: (f) => f,
 }
 
 export default ColumnDrag
