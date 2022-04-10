@@ -5,6 +5,6 @@ import App from './App'
 
 test('renders Task Board Example title', () => {
   render(<App />)
-  const linkElement = screen.getByText(/Task Board Example/i)
+  const linkElement = screen.getByText(/Task Board basic example/i)
   expect(linkElement).toBeInTheDocument()
 })

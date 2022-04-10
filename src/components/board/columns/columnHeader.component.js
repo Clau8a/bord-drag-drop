@@ -29,7 +29,7 @@ ColumnHeader.propTypes = {
 ColumnHeader.defaultProps = {
   title: '',
   taskLength: 0,
-  color: '#fff',
+  color: '#000',
 }
 
 export default ColumnHeader

@@ -12,7 +12,7 @@ const DraggableCard = ({ task, idkey, draggable, setDraggable, component, color 
   }
 
   return (
-    <div onDrag={drag} draggable id={task[idkey]}>
+    <div onDragStart={drag} draggable data-testid={`draggableTask-${task.id_task}`}>
       {component ? (
         component({ ...task, color })
       ) : (
@@ -38,7 +38,7 @@ DraggableCard.propTypes = {
 DraggableCard.defaultProps = {
   draggable: null,
   component: null,
-  idkey: 'id',
+  idkey: 'is_task',
   setDraggable: (f) => f,
   color: '#eaeaea',
 }

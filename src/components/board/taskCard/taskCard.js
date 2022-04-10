@@ -3,7 +3,7 @@ import './task.scss'
 
 const TaskCard = (card) => {
   return (
-    <div className='task' data-testid='task'>
+    <div className='task' data-testid={`task-${card.id_task}`}>
       <div className='task-header'>
         <label>{card.title}</label>
       </div>
