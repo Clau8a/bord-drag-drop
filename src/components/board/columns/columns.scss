@@ -1,0 +1,24 @@
+.column-header {
+  box-sizing: border-box;
+  background: #fff;
+  //border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  label {
+    margin: 0;
+    padding: 0.1em 0.5em;
+    display: inline-block;
+  }
+  .title {
+    box-sizing: border-box;
+    font-weight: 600;
+    padding-left: 0;
+    text-transform: capitalize;
+  }
+  .counter {
+    color: #fff;
+    padding: 0.7em 0.8em;
+    //border-radius: 4px;
+    font-weight: 500;
+    margin-right: 0.7em;
+  }
+}

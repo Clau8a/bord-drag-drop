@@ -15,11 +15,11 @@ test('drag one task from pending column to done column', () => {
     { id: 'pending', title: 'pending', color: '#f3f' },
     { id: 'done', title: 'done', color: '#8c00ff' },
   ]
-  render(<Board view='kanban' columns={columns} data={data} />)
+  render(<Board view='kanban' columns={columns} data={data} statusLabel='statusId' />)
   const pendingColumn = screen.getAllByTestId('pending')
   const doneColumnDrag = screen.getByTestId('done-drag')
   const doneTasks = screen.getAllByTestId('done')
-  const task = screen.getByTestId('task')
+  const task = screen.getByTestId('task-2')
 
   expect(pendingColumn.length).toBe(1)
 
