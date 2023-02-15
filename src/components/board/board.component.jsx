@@ -6,32 +6,45 @@ import TaskCard from './taskCard/taskCard'
 import ColumnHeader from './columns/columnHeader.component'
 import './draggable.scss'
 
-const Board = ({ view, data, columns, statusLabel, taskComponent, columnHeaderComponent }) => {
-  const [tasks, setTask] = useState(data)
+const Board = ({
+  taskIdLabel: cardIdLabel,
+  view,
+  data,
+  columns,
+  statusLabel,
+  taskComponent: cardComponent,
+  columnHeaderComponent,
+}) => {
+  const [cardList, setCardList] = useState(data)
 
-  const ChangeTaskStatus = (taskChanged, newStatus) => {
-    setTask(
-      tasks.map((task) =>
-        task.id_task === taskChanged.id_task ? { ...task, statusId: newStatus } : { ...task },
+  const changeCardStatus = (droppedCard, newStatus) => {
+    setCardList(
+      cardList.map((card) =>
+        card[cardIdLabel] === droppedCard[cardIdLabel]
+          ? { ...card, statusId: newStatus }
+          : { ...card },
       ),
     )
+  }
+
+  const getCardListByColumn = (columnId) => {
+    return cardList.filter((card) => card[statusLabel] === columnId)
   }
 
   return (
     <ColumnsContainer
       view={view}
-      dropDrag={ChangeTaskStatus}
-      taskIdLabel='id_task'
+      dropDrag={changeCardStatus}
+      taskIdLabel={cardIdLabel}
       statusLabel={statusLabel}
     >
       {columns.map((column) => (
         <ColumnDrag
           key={column.id}
-          id={column.id}
-          title={column.title.toLocaleLowerCase()}
-          color={column.color}
-          tasks={tasks.filter((task) => task[statusLabel] === column.id)}
-          taskComponent={taskComponent}
+          column={column}
+          cardIdLabel={cardIdLabel}
+          cardList={getCardListByColumn(column.id)}
+          cardComponent={cardComponent}
           columnHeaderComponent={columnHeaderComponent}
         />
       ))}
@@ -40,6 +53,7 @@ const Board = ({ view, data, columns, statusLabel, taskComponent, columnHeaderCo
 }
 
 Board.propTypes = {
+  taskIdLabel: PropTypes.string.isRequired,
   view: PropTypes.string,
   data: PropTypes.array,
   columns: PropTypes.array,

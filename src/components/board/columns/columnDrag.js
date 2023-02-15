@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import DraggableTask from '../draggableTask/draggableTask.component'
+import DraggableCard from '../draggableTask/draggableTask.component'
 
 const ColumnDrag = ({
   view,
-  id,
-  title,
-  tasks,
-  color,
+  column,
+  cardList,
   dropDrag,
-  draggable,
-  taskComponent,
+  draggable: draggableCardRef,
+  cardComponent,
   setDraggable,
-  taskIdLabel,
-  isRestricted,
+  cardIdLabel,
   columnHeaderComponent,
 }) => {
+  const { id, title, isRestricted, color } = column
   const [isOpenCollapse, setIsOpenCollapse] = useState(true)
   const [over, setOver] = useState('')
 
@@ -27,13 +25,16 @@ const ColumnDrag = ({
 
   function drop(e, iDropedElement) {
     // sending to pa
-    dropDrag(draggable, iDropedElement)
+    dropDrag(draggableCardRef, iDropedElement)
     // clean target card
     setDraggable(null)
     setOver('')
   }
 
-  function setCardTarget(card) {
+  function setDraggableCardRef(card) {
+    if (isRestricted) {
+      return
+    }
     setDraggable(card)
   }
 
@@ -55,8 +56,8 @@ const ColumnDrag = ({
 
   return (
     <div className='column-task-container' data-testid='column'>
-      <div onClick={setCollapse}></div>
-      {columnHeaderComponent(title, tasks.length, color)}
+      <div onClick={setCollapse} />
+      {columnHeaderComponent(title, cardList.length, color)}
       <div
         className={`column-body ${over} ${isOpenCollapse ? 'open' : 'collapse'}`}
         onDrop={(e) => drop(e, id)}
@@ -69,16 +70,15 @@ const ColumnDrag = ({
         data-testid={`${title}-drag`}
       >
         <div data-testid={title}>
-          {tasks.map((task) => (
-            <DraggableTask
-              key={task[taskIdLabel]}
-              task={task}
-              view={view}
-              color={color}
-              draggable={draggable}
-              setDraggable={!isRestricted ? setCardTarget : (f) => f}
-              idKey={taskIdLabel}
-              component={taskComponent}
+          {cardList.map((card) => (
+            <DraggableCard
+              key={card[cardIdLabel]}
+              card={card}
+              cardIdLabel={cardIdLabel}
+              columnColor={color}
+              draggableCardRef={draggableCardRef}
+              setDraggableCardRef={setDraggableCardRef}
+              cardComponent={cardComponent}
             />
           ))}
         </div>
@@ -88,16 +88,18 @@ const ColumnDrag = ({
 }
 
 ColumnDrag.propTypes = {
-  title: PropTypes.string,
-  color: PropTypes.string,
+  column: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    color: PropTypes.string,
+    isRestricted: PropTypes.bool,
+  }),
   view: PropTypes.string,
   tasks: PropTypes.array,
   taskIdLabel: PropTypes.string,
-  isRestricted: PropTypes.bool,
   dropDrag: PropTypes.func,
   setDraggable: PropTypes.func,
-  id: PropTypes.string,
-  draggable: PropTypes.bool,
+  draggable: PropTypes.object,
   taskComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   columnHeaderComponent: PropTypes.func,
 }

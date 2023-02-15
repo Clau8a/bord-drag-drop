@@ -1,7 +1,7 @@
 import React from 'react'
 import './task.scss'
 
-const TaskCard = (card) => {
+const TaskCard = ({ card }) => {
   return (
     <div className='task' data-testid={`task-${card.id_task}`}>
       <div className='task-header'>
