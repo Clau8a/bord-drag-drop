@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import Board from './components/board/board.component'
-import { dummyData, columnsArray, getView, DEFAULT_VIEW } from './utils/constants'
-import CustomCard from './components/custom/customCard.component'
-import CustomColumnHeader from './components/custom/customColumnHeader.component'
-import ViewButton from './components/viewButton/viewButton.component'
-import './App.scss'
+import React, { useState } from 'react';
+import Board from './components/board/board.component';
+import { dummyData, columnsArray, getView, DEFAULT_VIEW } from './utils/constants';
+import CustomCard from './components/custom/customCard.component';
+import CustomColumnHeader from './components/custom/customColumnHeader.component';
+import ViewButton from './components/viewButton/viewButton.component';
+import './App.scss';
 
 function App() {
-  const [view, setView] = useState(DEFAULT_VIEW)
+  const [view, setView] = useState(DEFAULT_VIEW);
 
   const handleChangeView = () => {
-    setView(getView(view))
-  }
+    setView(getView(view));
+  };
 
   return (
     <div className='app'>
@@ -25,9 +25,9 @@ function App() {
         <div className='task-list'>
           <Board
             view={view}
-            data={dummyData}
-            columns={columnsArray}
-            taskIdLabel='taskId'
+            itemsList={dummyData}
+            columnsList={columnsArray}
+            cardIdLabel='taskId'
             statusLabel='statusId'
           />
         </div>
@@ -39,12 +39,12 @@ function App() {
         </header>
         <div className='custom-task-list'>
           <Board
-            taskIdLabel='id_task'
+            cardIdLabel='id_task'
             view={view}
-            data={dummyData}
+            itemsList={dummyData}
             statusLabel='statusId'
-            columns={columnsArray}
-            taskComponent={CustomCard}
+            columnsList={columnsArray}
+            cardComponent={CustomCard}
             columnHeaderComponent={(title, taskLength, color) => (
               <CustomColumnHeader title={title} taskLength={taskLength} color={color} />
             )}
@@ -52,7 +52,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

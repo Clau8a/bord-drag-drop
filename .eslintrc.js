@@ -30,7 +30,7 @@ module.exports = {
     'react/prop-types': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-key': 'warn',
-    semi: ['error', 'never'],
+    semi: ['error', 'always'],
     quotes: ['error', 'single'],
     indent: ['error', 2, {
       'SwitchCase': 1
@@ -39,7 +39,7 @@ module.exports = {
     'no-new-object': 'error',
     'no-array-constructor': 'error',
     'react/jsx-filename-extension': [1, {
-      'extensions': ['.js', '.jsx']
+      'extensions': ['.js', '.jsx','.tsx']
     }]
   }
 };

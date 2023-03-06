@@ -18,7 +18,7 @@ export const dummyData = [
   { taskId: 11, title: 'Task 11', statusId: 'pending' },
   { taskId: 12, title: 'Task 12', statusId: 'pending' },
   { taskId: 13, title: 'Task 13', statusId: 'pending' },
-]
+];
 
 export const columnsArray = [
   { id: '1', title: 'column 1', color: '#222', isRestricted: true },
@@ -26,8 +26,8 @@ export const columnsArray = [
   { id: 'pending', title: 'pending', color: '#f3f' },
   { id: 'done', title: 'Done', color: '#8c00ff' },
   { id: 'cancel', title: 'cancel', color: '#ff8300' },
-]
+];
 
-export const DEFAULT_VIEW = 'kanban'
+export const DEFAULT_VIEW = 'kanban';
 
-export const getView = (view) => (view === DEFAULT_VIEW ? 'list' : DEFAULT_VIEW)
+export const getView = (view) => (view === DEFAULT_VIEW ? 'list' : DEFAULT_VIEW);

@@ -1,17 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// region contenedor de las columnas o listas de tarjetas
+// region Container
 const ColumnsContainer = ({ view, statusLabel, dropDrag, taskIdLabel, children }) => {
-  const [currentDragging, setCurrentDragging] = React.useState(null)
+  const [currentDragging, setCurrentDragging] = React.useState(null);
 
   const handleOnDropTask = (card, newStatus) => {
     if (card !== null) {
       if (card[statusLabel] !== newStatus) {
-        dropDrag(card, newStatus)
+        dropDrag(card, newStatus);
       }
     }
-  }
+  };
 
   let childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
@@ -21,13 +21,13 @@ const ColumnsContainer = ({ view, statusLabel, dropDrag, taskIdLabel, children }
         draggable: currentDragging,
         dropDrag: handleOnDropTask,
         setDraggable: setCurrentDragging,
-      })
+      });
     }
-    return child
-  })
+    return child;
+  });
 
-  return <div className={`task-board-container ${view}`}>{childrenWithProps}</div>
-}
+  return <div className={`task-board-container ${view}`}>{childrenWithProps}</div>;
+};
 
 ColumnsContainer.propTypes = {
   view: PropTypes.string,
@@ -35,13 +35,13 @@ ColumnsContainer.propTypes = {
   taskIdLabel: PropTypes.string,
   statusLabel: PropTypes.string,
   children: PropTypes.node,
-}
+};
 
 ColumnsContainer.defaultProps = {
   view: 'kanban',
   dropDrag: (f) => f,
   taskIdLabel: 'id',
-}
+};
 // endregion
 
-export default ColumnsContainer
+export default ColumnsContainer;
